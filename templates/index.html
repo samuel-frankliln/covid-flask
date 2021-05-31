@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="utf-8">
+  <title>CORONA</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet">
+  <script>
+
+    $("#file-picker").change(function(){
+
+        var input = document.getElementById('file-picker');
+
+        for (var i=0; i<input.files.length; i++)
+        {
+            var ext= input.files[i].name.substring(input.files[i].name.lastIndexOf('.')+1).toLowerCase()
+
+            if ((ext == 'jpg') || (ext == 'png'))
+            {
+                $("#msg").text("Files are supported")
+            }
+            else
+            {
+                $("#msg").text("Files are NOT supported")
+                document.getElementById("file-picker").value ="";
+            }
+
+        }
+
+
+    } );
+
+</script>
+
+</head>
+
+<header id="header" class="fixed-top">
+  <div class="container">
+
+
+
+    <nav class="main-nav float-right d-none d-lg-block">
+      <ul>
+        <li class="active"><a href="#intro">Home</a></li>
+        <li><a href="#about">About </a></li>
+        <li><a href="#services">Prevention</a></li>
+      
+      </ul>
+    </nav><!-- .main-nav -->
+    
+  </div>
+</header><!-- #header -->
+
+
+<div class="card">
+<form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+
+<div class="login card" style="color: orangered;">
+  <pre>
+  <h1 style="width: fit-content;color: orangered;">Upload Image To Classify<br> X-ray</h1>
+  <strong>Choose Image:</strong>
+  <input class="button" type="file" name="file" accept="image/*" multiple>
+  <input type="submit" value="Predict!" class="subbut">
+  </pre>
+</div>
+</form>
+</div>
+</div>
+<div class="cardlist">
+  <ul>
+  <li>1.The images should be of 28*28</li>
+  <li>2.The images must be in gratscale if possible</li>
+  <li>3.There should not be much noise in the images</li>
+  <li>4.These prediction are 100 percent accuracte do keep an margin for error</li>
+</ul>
+</div>
+
+</body>
+</html>
